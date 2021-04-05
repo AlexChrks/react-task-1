@@ -1,0 +1,20 @@
+$font-color: #278585;
+$font-stack: 'Lucida Sans', 'Lucida Sans Regular', Verdana, sans-serif;
+$primary-borders: 2px solid #cfcc1a;
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  border: $primary-borders;
+
+  margin: 10px;
+  padding: 10px;
+}
+
+.sectionName {
+  font-family: $font-stack;
+  color: $font-color;
+}

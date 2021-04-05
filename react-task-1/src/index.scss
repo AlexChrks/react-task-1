@@ -1,0 +1,11 @@
+$center-margin: 0 auto;
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: $center-margin;
+  max-width: 1300px;
+}
