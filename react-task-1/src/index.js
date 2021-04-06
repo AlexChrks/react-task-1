@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {App} from './components/App/index.js';
 import './index.scss';
-import App from './components/App';
 
 const store = {
   user: {
@@ -15,8 +15,6 @@ const store = {
 };
 
 ReactDOM.render(
-    <App store={store}/>,
+    <App store={ store } />,
   document.getElementById('root')
 );
-
-export default store;
