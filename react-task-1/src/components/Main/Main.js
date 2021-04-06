@@ -8,4 +8,4 @@ export function Main({ avatar }) {
       <img src={avatar.image} alt={avatar.alt}></img>
     </main>
   );
-};
+}

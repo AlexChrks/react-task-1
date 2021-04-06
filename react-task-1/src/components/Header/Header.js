@@ -8,4 +8,4 @@ export function Header({ user }) {
       <h1 className={styles.heading}>Hello, {user.firstName} {user.lastName}!</h1>
     </header>
   );
-};
+}

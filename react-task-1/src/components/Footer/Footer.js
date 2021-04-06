@@ -7,4 +7,4 @@ export function Footer() {
       <h3>Footer</h3>
     </footer>
   );
-};
+}
