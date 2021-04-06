@@ -1,0 +1,19 @@
+$font-color: #278585;
+$font-stack: 'Lucida Sans', 'Lucida Sans Regular', Verdana, sans-serif;
+$primary-borders: 2px solid #833c3c;
+
+.heading, .sectionName {
+  font-family: $font-stack;
+  color: $font-color;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border: $primary-borders;
+
+  margin: 10px;
+}

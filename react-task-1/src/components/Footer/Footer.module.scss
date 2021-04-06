@@ -1,0 +1,16 @@
+$font-color: #278585;
+$primary-borders: 2px solid #0b3f70;
+$font-stack: 'Lucida Sans', 'Lucida Sans Regular', Verdana, sans-serif;
+
+.footer {
+  color: $font-color;
+
+  border: $primary-borders;
+
+  margin: 10px;
+
+  display: flex;
+  justify-content: center;
+
+  font-family: $font-stack;
+}
