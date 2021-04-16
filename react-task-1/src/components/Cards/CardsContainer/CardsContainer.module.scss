@@ -1,0 +1,22 @@
+$font-stack: 'Lucida Sans', 'Lucida Sans Regular', Verdana, sans-serif;
+$font-color: #6d6d6d;
+
+.container {
+  width: 95%;
+
+  background-color: #d4d4d4;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 10px;
+
+  padding: 25px;
+  margin: 15px;
+}
+
+.noCardsNotification {
+  font-family: $font-stack;
+  color: $font-color;
+}
