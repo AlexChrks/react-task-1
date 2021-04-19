@@ -1,0 +1,66 @@
+$transition: 0.3s ease-out;
+$font-stack: 'Lucida Sans', 'Lucida Sans Regular', Verdana, sans-serif;
+$font-color: #6d6d6d;
+
+.creationForm {
+  width: 300px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  row-gap: 5px;
+  align-items: center;
+}
+
+.heading {
+  font-family: $font-stack;
+  color: $font-color;
+  font-size: 1.5em;
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  appearance: none;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+input:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem #86b6fe98;
+}
+
+.btnPrimary {
+  width: 50%;
+  height: 30px;
+
+  color: #fff;
+
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+
+  border-radius: 4px;
+
+  outline: none;
+  border: none;
+
+  transition: $transition;
+}
+
+.btnPrimary:hover {
+  cursor: pointer;
+
+  background-color: #0554c9;
+}

@@ -1,32 +1,63 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { apiCall } from '../../../api/mockedApi.js';
-import { Card } from '../Card/index.js'
+import { Card } from '../Card/index.js';
+import { CardsCreationForm } from '../CardsCreationForm/index.js';
+
 import styles from './CardsContainer.module.scss';
 
-export class CardsContainer extends Component {
+export function CardsContainer() {
 
-  state = {
-    cards: []
-  }
+  const [state, setState] = useState({ cards: [] });
 
-  componentDidMount() {
+  useEffect(() => {
     apiCall().then((data) => {
-      this.setState({ cards: data });
+      setState({ cards: data });
     });
+  }, []);
+
+
+  function deleteEvent(id) {
+    const copyCardsArr = Object.assign([], state.cards);
+    const filtered = copyCardsArr.filter((el) => !(el.id === id));
+    setState({cards: filtered});
   }
 
-  render() {
-    const { cards } = this.state;
+  function handleSubmit (e) {
+    e.preventDefault();
 
-    if (!cards.length) {
-      return (
-        <div className={styles.noCardsNotification}>No cards yet</div>
-      );
+    const newObj = {
+      title: e.target[0].value,
+      type: e.target[1].value,
+      imageUrl: e.target[2].value,
+      price: e.target[3].value,
+      country: e.target[4].value,
+      id: state.cards.length + 1,
     }
+
+    const stateCopy = Object.assign([], state.cards)
+    stateCopy.push(newObj);
+    setState({cards: stateCopy});
+  }
+
+  const { cards } = state;
+
+  if (!cards.length) {
     return (
-      <div className={styles.container}>
-        { cards.map((card) => <Card key={card.id} cardData={card} />)}
-      </div>
+      <div className={styles.noCardsNotification}>No cards yet</div>
     );
   }
+  return (
+    <div className={styles.container}>
+      { cards.map((card) => {
+        return (
+          <Card 
+            key={card.id} 
+            cardData={card} 
+            deleteEvent={() => {deleteEvent(card.id)}} /> 
+        )
+      })}
+      <CardsCreationForm handleSubmit={handleSubmit}/>
+    </div>
+  );
+
 }
