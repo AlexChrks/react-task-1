@@ -25,7 +25,6 @@ $transition: 0.3s ease-out;
 
 .images {
   width: 100%;
-  height: 50%;
 }
 
 .btnClose {
@@ -44,6 +43,8 @@ $transition: 0.3s ease-out;
   outline: none;
 
   transition: $transition;
+
+  margin: 10px;
 }
 
 .btnClose:hover {

@@ -8,6 +8,7 @@ import styles from './CardsContainer.module.scss';
 export function CardsContainer() {
 
   const [state, setState] = useState({ cards: [] });
+  const [cardState, setCardState] = useState({});
 
   useEffect(() => {
     apiCall().then((data) => {
@@ -17,46 +18,44 @@ export function CardsContainer() {
 
 
   function deleteEvent(id) {
-    const copyCardsArr = Object.assign([], state.cards);
-    const filtered = copyCardsArr.filter((el) => !(el.id === id));
-    setState({cards: filtered});
+    const filtered = state.cards.filter(el => el.id !== id);
+    setState({ cards: filtered });
   }
 
-  function handleSubmit (e) {
-    e.preventDefault();
+  function handleSubmit(event) {
+    event.preventDefault();
+    setState({ cards: [...state.cards, cardState] });
+  }
 
-    const newObj = {
-      title: e.target[0].value,
-      type: e.target[1].value,
-      imageUrl: e.target[2].value,
-      price: e.target[3].value,
-      country: e.target[4].value,
+  function handleChange(event) {
+    console.log(event.target.name);
+    setCardState({
+      ...cardState,
+      [event.target.name]: event.target.value,
       id: state.cards.length + 1,
-    }
-
-    const stateCopy = Object.assign([], state.cards)
-    stateCopy.push(newObj);
-    setState({cards: stateCopy});
+    });
   }
 
   const { cards } = state;
 
   if (!cards.length) {
     return (
-      <div className={styles.noCardsNotification}>No cards yet</div>
+      <>
+        <div className={styles.noCardsNotification}>No cards yet</div>
+        <CardsCreationForm handleSubmit={handleSubmit} handleChange={handleChange} key={cardState}/>
+      </>
+
     );
   }
   return (
     <div className={styles.container}>
-      { cards.map((card) => {
-        return (
-          <Card 
-            key={card.id} 
-            cardData={card} 
-            deleteEvent={() => {deleteEvent(card.id)}} /> 
-        )
-      })}
-      <CardsCreationForm handleSubmit={handleSubmit}/>
+      { cards.map(card => (
+        <Card
+          key={card.id}
+          cardData={card}
+          deleteEvent={() => { deleteEvent(card.id) }} />
+      ))}
+      <CardsCreationForm handleSubmit={handleSubmit} handleChange={handleChange} key={cardState}/>
     </div>
   );
 
