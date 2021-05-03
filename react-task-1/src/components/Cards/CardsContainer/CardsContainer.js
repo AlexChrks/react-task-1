@@ -16,14 +16,20 @@ export function CardsContainer() {
     });
   }, []);
 
-
-  function deleteEvent(id) {
+  function deleteCard(id) {
     const filtered = state.cards.filter(el => el.id !== id);
     setState({ cards: filtered });
   }
 
   function handleSubmit(event) {
     event.preventDefault();
+    const children = event.target.children;
+    for (let i = 1; i < children.length - 1; i++) {
+      if (!children[i].value) {
+        children[i].focus();
+        return
+      }
+    }
     setState({ cards: [...state.cards, newCard] });
   }
 
@@ -46,9 +52,14 @@ export function CardsContainer() {
         <Card
           key={card.id}
           cardData={card}
-          deleteEvent={() => { deleteEvent(card.id) }} />
+          deleteCard={() => { deleteCard(card.id) }} />
       ))}
-      <CardsCreationForm handleSubmit={handleSubmit} handleChange={handleChange} key={newCard}/>
+      <CardsCreationForm 
+      handleSubmit={handleSubmit} 
+      handleChange={handleChange} 
+      newCard={newCard} 
+      key={newCard} 
+      />
     </div>
   );
 

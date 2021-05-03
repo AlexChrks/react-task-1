@@ -64,3 +64,21 @@ input:focus {
 
   background-color: #0554c9;
 }
+
+
+.invalidValue {
+  color: tomato;
+  font-size: 12px;
+  font-family: $font-stack;
+  animation-duration: 2s;
+  animation-name: error-opacity;
+}
+
+@keyframes error-opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
