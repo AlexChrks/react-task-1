@@ -97,13 +97,18 @@ export function CardsContainer() {
       }
     }
     
-    const transformedNewCard = Object.entries(newCard).reduce((acc, cur) => {
-      acc[cur[0]] = cur[1].value;
-      acc['id'] = state.cards.length + 1;
-      return acc;
-    },{});
-
-    setState({ cards: [...state.cards, transformedNewCard] });
+    setState({
+      cards: [
+        ...state.cards,
+      {
+        title: newCard.title.value,
+        type: newCard.type.value,
+        imageUrl: newCard.imageUrl.value,
+        price: newCard.price.value,
+        country: newCard.country.value,
+      }
+    ]});
+    
     setNewCard(initialState);
   }
 
