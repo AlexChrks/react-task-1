@@ -1,0 +1,23 @@
+$font-stack: 'Lucida Sans', 'Lucida Sans Regular', Verdana, sans-serif;
+
+
+.invalidValue {
+  color: tomato;
+  font-size: 12px;
+  font-family: $font-stack;
+  animation-duration: 2s;
+  animation-name: error-opacity;
+}
+
+.missingInput {
+  background-color: tomato;
+}
+
+@keyframes error-opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

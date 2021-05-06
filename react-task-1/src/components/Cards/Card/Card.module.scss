@@ -1,5 +1,6 @@
 $font-stack: 'Lucida Sans', 'Lucida Sans Regular', Verdana, sans-serif;
 $font-color: #6d6d6d;
+$transition: 0.3s ease-out;
 
 .card {
   width: 300px;
@@ -13,9 +14,40 @@ $font-color: #6d6d6d;
 
   font-family: $font-stack;
   color: $font-color;
+
+  transition: $transition;
+}
+
+.card:hover {
+  cursor: pointer;
+  transform: scale(1.03);
 }
 
 .images {
   width: 100%;
-  height: 50%;
+}
+
+.btnClose {
+  background-image: url(./images/cancel.png);
+
+  float: right;
+  width: 25px;
+  height: 25px;
+
+  background-size: 20px 20px;
+  background-position: center;
+  background-color: #fff;
+  background-repeat: no-repeat;
+
+  border: none;
+  outline: none;
+
+  transition: $transition;
+
+  margin: 10px;
+}
+
+.btnClose:hover {
+  cursor: pointer;
+  transform: rotate(90deg) scale(1.2);
 }
