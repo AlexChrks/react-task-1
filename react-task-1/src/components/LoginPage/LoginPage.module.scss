@@ -1,0 +1,38 @@
+$font-stack: 'Lucida Sans', 'Lucida Sans Regular', Verdana, sans-serif;
+
+.btnPrimary {
+  width: 50%;
+  height: 30px;
+
+  color: #fff;
+
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+
+  border-radius: 4px;
+
+  outline: none;
+  border: none;
+
+  transition: 0.2s ease-out;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 10px;
+  width: 500px;
+  margin: 0 auto;
+}
+
+.loginHeader {
+  font-family: $font-stack;
+  font-size: 18px;
+}
+
+.btnPrimary:hover {
+  cursor: pointer;
+  background-color: #90bcff;
+}
