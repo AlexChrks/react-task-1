@@ -1,6 +1,7 @@
 $font-color: #278585;
 $font-stack: 'Lucida Sans', 'Lucida Sans Regular', Verdana, sans-serif;
 $primary-borders: 2px solid #cfcc1a;
+$transition: 0.2s ease-out;
 
 .main {
   display: flex;
@@ -12,9 +13,79 @@ $primary-borders: 2px solid #cfcc1a;
 
   margin: 10px;
   padding: 10px;
+
+  position: relative;
 }
 
 .sectionName {
   font-family: $font-stack;
   color: $font-color;
+}
+
+.list {
+  text-decoration: none;
+  list-style: none;
+
+  margin: 0 auto;
+  padding: 0;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  width: 500px;
+  margin: 0 auto;
+}
+
+.listItem {
+  text-align: center;
+  background: aquamarine;
+  width: 100%;
+}
+
+.links {
+  text-decoration: none;
+  font-family: $font-stack;
+  font-size: 12px;
+  color: $font-color;
+
+  transition: $transition;
+}
+
+.container {
+  width: 100%;
+}
+
+.btnSignOut {
+  font-family: "Lucida Sans", "Lucida Sans Regular", Verdana, sans-serif;
+  background-color: tomato;
+  color: #fff;
+  border: none;
+  outline: none;
+  font-size: 12px;
+  transition: 0.2s ease-out;
+  padding: 3px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border-radius: 2px;
+}
+
+.helper, .greeting {
+  text-align: center;
+  font-family: $font-stack;
+  font-size: 14px;
+  color: $font-color;
+}
+
+.helper {
+  color: tomato;
+}
+
+.btnSignOut:hover {
+  background-color: rgb(243, 167, 154);
+}
+
+.links:hover {
+  color: #8cc5c5;
 }
