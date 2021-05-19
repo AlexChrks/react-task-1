@@ -1,85 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { apiCall } from '../../../api/mockedApi.js';
 import { Card } from '../Card/index.js';
 import { CardsCreationForm } from '../CardsCreationForm/index.js';
 
 import styles from './CardsContainer.module.scss';
+import { useSelector, useDispatch } from 'react-redux';
 
-const initialState = {
-  title: {
-    name: 'title',
-    value: '',
-    type: 'text',
-    placeholder: 'Title',
-    hasError: false,
-    errorMessage: 'Title is required',
-  },
-  type: {
-    name: 'type',
-    value: '',
-    type: 'text',
-    placeholder: 'Type',
-    hasError: false,
-    errorMessage: 'Type is required',
-  },
-  imageUrl: {
-    name: 'imageUrl',
-    value: '',
-    type: 'text',
-    placeholder: 'Image Url',
-    hasError: false,
-    errorMessage: 'Url is required',
-  },
-  price: {
-    name: 'price',
-    value: '',
-    type: 'number',
-    placeholder: 'Price',
-    hasError: false,
-    errorMessage: 'Price is required',
-  },
-  country: {
-    name: 'country',
-    value: '',
-    type: 'text',
-    placeholder: 'Country',
-    hasError: false,
-    errorMessage: 'Country is required',
-  },
-}
+import { loadCards, deleteCurrentCard, submitCard, loadCardsAsync } from '../../../store/actions/cardsActions';
+import { setNewCard, validateNewCard, rewriteNewCard } from '../../../store/actions/newCardActions';
 
 export function CardsContainer() {
 
-  const [state, setState] = useState({ cards: [] });
-  const [newCard, setNewCard] = useState(initialState);
+  const cards = useSelector((state) => state.cardsReducer.cards);
+  const newCard = useSelector((state) => state.newCardReducer);
+
+  const dispatchAction = useDispatch();
   
   useEffect(() => {
-    apiCall().then((data) => {
-      setState({ cards: data });
-    });
+    loadCardsAsync()(dispatchAction);
   }, []);
 
-  function deleteCard(id) {
-    const filtered = state.cards.filter(el => el.id !== id);
-    setState({ cards: filtered });
-  }
+  
+  const deleteCard = useCallback((id) => {
+    dispatchAction(deleteCurrentCard(id));
+  }, [dispatchAction]);
 
   function newCardValidation () {
-    const reduced = Object.entries(newCard).reduce((acc, cur) => {
-      if (!cur[1].value) {
-        acc[cur[0]] = {
-          ...cur[1],
-          hasError: true,
-        }
-      } else {
-        acc[cur[0]] = {
-          ...cur[1],
-        }
-      }
-      return acc;
-    },{});
-
-    setNewCard(reduced);
+    dispatchAction(validateNewCard())
   }
 
   function handleSubmit(event) {
@@ -96,40 +43,38 @@ export function CardsContainer() {
         return
       }
     }
-    
-    setState({
-      cards: [
-        ...state.cards,
-      {
-        title: newCard.title.value,
-        type: newCard.type.value,
-        imageUrl: newCard.imageUrl.value,
-        price: newCard.price.value,
-        country: newCard.country.value,
-      }
-    ]});
-    
-    setNewCard(initialState);
+
+    const newCardToSubmit = {
+      title: newCard.title.value,
+      type: newCard.type.value,
+      imageUrl: newCard.imageUrl.value,
+      price: newCard.price.value,
+      country: newCard.country.value,
+      id: `${newCard.title}${cards.length + 1}`
+    }
+
+    dispatchAction(submitCard(newCardToSubmit, cards));
+
+    dispatchAction(rewriteNewCard());
   }
 
   function handleChange(event) {
     const { target } = event;
 
-    setNewCard({
+    dispatchAction(setNewCard({
       ...newCard,
       [target.name]: { ...newCard[target.name], value: target.value, hasError: false },
-    });
+      }));
   }
 
   function handleBlur (event) {
     const { target } = event;
 
-    setNewCard({
+    dispatchAction(setNewCard({
       ...newCard,
       [target.name]: { ...newCard[target.name], hasError: !target.value },
-    });
+    }));
   }
-  const { cards } = state;
 
   return (
     <div className={styles.container}>
@@ -140,7 +85,8 @@ export function CardsContainer() {
         <Card
           key={card.id}
           cardData={card}
-          deleteCard={() => { deleteCard(card.id) }} />
+          deleteCard={() => { deleteCard(card.id) }}         
+          />
       ))}
       <CardsCreationForm 
       handleSubmit={handleSubmit} 

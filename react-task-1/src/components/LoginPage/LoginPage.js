@@ -1,7 +1,21 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import styles from './LoginPage.module.scss';
+import {signIn} from '../../store/actions/authActions';
 
-export function LogInForm({loginHandler}) {
+import {
+  useHistory,
+} from "react-router-dom";
+
+export function LogInForm() {
+  let history = useHistory();
+  const dispatch = useDispatch();
+
+  function loginHandler(e) {
+    e.preventDefault();
+    dispatch(signIn());
+    history.push("/profile");
+  }
 
   return (
     <form className={styles.loginForm} onSubmit={loginHandler}>
